@@ -1,12 +1,6 @@
-import { Route, Switch } from "react-router-dom";
-import Home from "./Home";
-import About from "./About";
+import { AppRouter } from "config/router/AppRouter";
+import "assets/scss/app.scss";
 
-const App = () => (
-  <Switch>
-    <Route exact={true} path="/" component={Home} />
-    <Route exact={true} path="/about" component={About} />
-  </Switch>
-);
+const App = () => <AppRouter />;
 
 export default App;
