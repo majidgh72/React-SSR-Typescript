@@ -1,10 +1,9 @@
-import express from 'express';
-import React from 'react';
-import { renderToString } from 'react-dom/server';
+import express from "express";
+import { renderToString } from "react-dom/server";
 import { StaticRouterContext } from "react-router";
-import { StaticRouter } from 'react-router-dom';
+import { StaticRouter } from "react-router-dom";
 
-import App from './App';
+import App from "./App";
 
 let assets: any;
 
@@ -14,17 +13,23 @@ const syncLoadAssets = () => {
 syncLoadAssets();
 
 const cssLinksFromAssets = (assets, entrypoint) => {
-  return assets[entrypoint] ? assets[entrypoint].css ?
-  assets[entrypoint].css.map(asset=>
-    `<link rel="stylesheet" href="${asset}">`
-  ).join('') : '' : '';
+  return assets[entrypoint]
+    ? assets[entrypoint].css
+      ? assets[entrypoint].css
+          .map((asset) => `<link rel="stylesheet" href="${asset}">`)
+          .join("")
+      : ""
+    : "";
 };
 
-const jsScriptTagsFromAssets = (assets, entrypoint, extra = '') => {
-  return assets[entrypoint] ? assets[entrypoint].js ?
-  assets[entrypoint].js.map(asset=>
-    `<script src="${asset}"${extra}></script>`
-  ).join('') : '' : '';
+const jsScriptTagsFromAssets = (assets, entrypoint, extra = "") => {
+  return assets[entrypoint]
+    ? assets[entrypoint].js
+      ? assets[entrypoint].js
+          .map((asset) => `<script src="${asset}"${extra}></script>`)
+          .join("")
+      : ""
+    : "";
 };
 
 export const renderApp = (req: express.Request, res: express.Response) => {
@@ -61,10 +66,10 @@ export const renderApp = (req: express.Request, res: express.Response) => {
 };
 
 const server = express()
-  .disable('x-powered-by')
+  .disable("x-powered-by")
   .use(express.static(process.env.RAZZLE_PUBLIC_DIR!))
-  .get('/*', (req: express.Request, res: express.Response) => {
-    const { html = '', redirect = false } = renderApp(req, res);
+  .get("/*", (req: express.Request, res: express.Response) => {
+    const { html = "", redirect = false } = renderApp(req, res);
     if (redirect) {
       res.redirect(redirect);
     } else {
