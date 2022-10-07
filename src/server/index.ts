@@ -1,10 +1,13 @@
 import express from "express";
+import compression from "compression";
 import { renderApp } from "./utils";
 
 const server = express();
 
 server.set("view engine", "hbs");
 server.set("views", "src/server");
+
+server.use(compression());
 
 server
   .disable("x-powered-by")
