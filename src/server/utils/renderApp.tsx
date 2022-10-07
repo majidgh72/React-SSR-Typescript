@@ -1,25 +1,25 @@
-import express from "express";
-import { renderToString } from "react-dom/server";
-import { StaticRouterContext } from "react-router";
-import { StaticRouter } from "react-router-dom";
-import { cssLinksFromAssets, jsScriptTagsFromAssets } from ".";
-import App from "App";
+import { Request } from 'express';
+import { renderToString } from 'react-dom/server';
+import { StaticRouterContext } from 'react-router';
+import { StaticRouter } from 'react-router-dom';
+import { cssLinksFromAssets, jsScriptTagsFromAssets } from '.';
+import App from 'App';
 
-let assets: any;
+let assets: object;
 
 const syncLoadAssets = () => {
-  assets = require(process.env.RAZZLE_ASSETS_MANIFEST!);
+  assets = require(process.env.RAZZLE_ASSETS_MANIFEST);
 };
 
 syncLoadAssets();
 
-export const renderApp = (req: express.Request, res: express.Response) => {
+export const renderApp = (req: Request) => {
   const context: StaticRouterContext = {};
 
   const markup = renderToString(
     <StaticRouter context={context} location={req.url}>
       <App />
-    </StaticRouter>
+    </StaticRouter>,
   );
 
   if (context.url) {
@@ -27,12 +27,8 @@ export const renderApp = (req: express.Request, res: express.Response) => {
   } else {
     return {
       markup,
-      cssLinks: cssLinksFromAssets(assets, "client"),
-      scriptTags: jsScriptTagsFromAssets(
-        assets,
-        "client",
-        " defer crossorigin"
-      ),
+      cssLinks: cssLinksFromAssets(assets, 'client'),
+      scriptTags: jsScriptTagsFromAssets(assets, 'client', ' defer crossorigin'),
     };
   }
 };

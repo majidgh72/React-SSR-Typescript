@@ -1,5 +1,5 @@
-import { Route, Switch } from "react-router-dom";
-import { routes } from "./routes";
+import { Route, Switch } from 'react-router-dom';
+import { routes } from './routes';
 
 export const AppRouter: React.FC = () => {
   return (

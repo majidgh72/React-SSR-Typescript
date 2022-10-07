@@ -1,4 +1,4 @@
-import { _WORDS } from "i18n";
+import { _WORDS } from 'i18n';
 
 export const useTranslation = () => {
   return {

@@ -1,14 +1,14 @@
-import About from "views/About";
-import Home from "views/Home";
+import About from 'views/About';
+import Home from 'views/Home';
 
 export const routes = [
   {
-    path: "/",
+    path: '/',
     exact: true,
     component: Home,
   },
   {
-    path: "/about",
+    path: '/about',
     exact: true,
     component: About,
   },

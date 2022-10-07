@@ -1,5 +1,5 @@
-import { AppRouter } from "config/router/AppRouter";
-import "assets/scss/app.scss";
+import { AppRouter } from 'config/router/AppRouter';
+import 'assets/scss/app.scss';
 
 const App = () => <AppRouter />;
 

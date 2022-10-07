@@ -1,17 +1,18 @@
-import express from "express";
+import express from 'express';
+import server from './server';
 
-let app = require("./server").default;
+let app = server;
 
 if (module.hot) {
-  module.hot.accept("./server", () => {
-    console.log("🔁  HMR Reloading `./server`...");
+  module.hot.accept('./server', () => {
+    console.log('🔁  HMR Reloading `./server`...');
     try {
-      app = require("./server").default;
+      app = server;
     } catch (error) {
       console.error(error);
     }
   });
-  console.info("✅  Server-side HMR Enabled!");
+  console.info('✅  Server-side HMR Enabled!');
 }
 
 const port = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
